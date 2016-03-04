@@ -67,16 +67,22 @@ class GameVis(object):
         # sensor lines
         impacts = self.game.sensor_array.last_impacts
 
-        for idx, sensor in enumerate(self.game.sensor_array.sensors):
-            self.w.create_line(heli.x_screen,
-                                heli.y_screen,
-                                heli.x_screen+sensor[0],
-                                heli.y_screen+sensor[1])
+        emp = self.game.last_emp
 
-            self.w.create_rectangle(impacts[idx][0],
-                                impacts[idx][1],
-                                impacts[idx][0]+4,
-                                impacts[idx][1]+4, fill='red')
+        for idx, sensor in enumerate(self.game.sensor_array.sensors):
+            try:
+                self.w.create_line(heli.x_screen,
+                                    heli.y_screen,
+                                    heli.x_screen+sensor[0],
+                                    heli.y_screen+sensor[1],
+                                    width=int((emp[idx]/sum(emp))*100))
+
+                self.w.create_rectangle(impacts[idx][0],
+                                    impacts[idx][1],
+                                    impacts[idx][0]+4,
+                                    impacts[idx][1]+4, fill='red')
+            except:
+                pass
 
         print("sensors: {}".format(self.game.sensor_array.last_vals))
 
@@ -90,4 +96,4 @@ class GameVis(object):
             self.w.after(20, self.schedule_tick)
         else:
             self.running = False
-            self.game.think_about_it()
+            # self.game.think_about_it()
