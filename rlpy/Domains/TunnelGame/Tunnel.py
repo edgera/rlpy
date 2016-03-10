@@ -76,8 +76,8 @@ class Tunnel(object):
             rect.r -= self.screen_advance_distance
 
         if self.obstacle is not None:
-            self.obstacle .l -= self.screen_advance_distance
-            self.obstacle .r -= self.screen_advance_distance
+            self.obstacle.l -= self.screen_advance_distance
+            self.obstacle.r -= self.screen_advance_distance
 
         if self.rects[0].r < 0:
             del self.rects[0]
